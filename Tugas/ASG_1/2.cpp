@@ -1,15 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
+
+
 struct node {
     int value;
-    bool visit;
     node* next;
-}*head;
+}*head, * tail;
 
 node* createnode(int value) {
     node* temp = (node*)malloc(sizeof(node));
-    temp->value = value;
     temp->next = NULL;
+    temp->value = value;
     return temp;
 }
 
@@ -19,75 +20,56 @@ void push(int value) {
         head = temp;
     }
     else {
-        temp->next = head;
-        head = temp;
-    }
-}
-
-void pushVIP(int value) {
-    node* temp = createnode(value);
-    if (!head) {
-        head = temp;
-    }
-    else {
-        node* curr_node = head;
-        while (curr_node->next) {
-            curr_node = curr_node->next;
+        node* curr = head;
+        while (curr->next && curr->next != head) {
+            curr = curr->next;
         }
-        curr_node->next = temp;
+        curr->next = temp;
         temp->next = head;
-    }
-}
-
-bool find() {
-    if (!head) {
-        return true;
-    }
-    else {
-        node* temp = head;
-        while (temp) {
-            if (temp->visit == false) {
-                temp->visit = true;
-                temp = temp->next;
-            }
-            else if (temp->visit == true) {
-                return false;
-            }
-        }
-        return true;
     }
 }
 
 void print() {
-    node* curr_node = head;
-    while (curr_node) {
-        if (curr_node->visit == true) {
-            return;
-        }
-        if (curr_node->next == NULL) {
-            printf(" %d ", curr_node->value);
-            curr_node->visit = true;
-            curr_node = curr_node->next;
+    node* temp = head;
+    do {
+        if (temp->next == head) {
+            printf("%d\n", temp->value);
         }
         else {
-            printf(" %d ", curr_node->value);
-            curr_node->visit = true;
-            curr_node = curr_node->next;
+            printf("%d -> ", temp->value);
+        }
+        temp = temp->next;
+    } while (temp && temp != head);
+}
+
+bool circular(node* target) {
+    if (!head) {
+        return false;
+    }
+    node* temp1 = head;
+    node* temp2 = head;
+    while (temp1 && temp2 && temp1->next && temp2->next->next) {
+        temp1 = temp1->next;
+        temp2 = temp2->next->next;
+        if (temp1 == temp2) {
+            return true;
         }
     }
-    puts("");
+    return false;
 }
+
 
 int main() {
     push(10);
-    pushVIP(20);
+    push(20);
     push(30);
+    push(40);
     print();
-    if (find() == true) {
-        puts("\nTidak ada Cycle");
+    if (circular(head) == true) {
+        puts("Circular");
     }
     else {
-        puts("\nAda Cycle");
+        puts("Not Circular");
     }
     return 0;
 }
