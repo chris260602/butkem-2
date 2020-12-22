@@ -30,26 +30,31 @@ void pushtail(int value) {
     }
 }
 void swap(node* node1, node* node2) {
+    if (head) {
+        node* hapus = head;
+        while (hapus) {
+            hapus = head->next;
+            head->next = NULL;
+            free(head);
+            head = hapus;
+        }
+    }
     node* temp1 = node1, * temp2 = node2;
     while (temp1 && temp2) {
         if (temp1->nilai > temp2->nilai) {
-            // push(temp2->nilai, final);
             pushtail(temp2->nilai);
             temp2 = temp2->next;
         }
         else {
-            // push(temp1->nilai, final);
             pushtail(temp1->nilai);
             temp1 = temp1->next;
         }
     }
     while (temp1) {
-        // push(temp1->nilai, final);
         pushtail(temp1->nilai);
         temp1 = temp1->next;
     }
     while (temp2) {
-        // push(temp2->nilai, final);
         pushtail(temp2->nilai);
         temp2 = temp2->next;
     }
@@ -71,15 +76,21 @@ void print(node* curr_node) {
 int main() {
     node* a = NULL;
     node* b = NULL;
-    push(30, &a);
-    push(20, &a);
-    push(10, &a);
+    int n, m, num;
+    printf("How many elements on the first linked list(Besar ke Kecil): ");
+    scanf("%d", &n);
+    for (int i = 0;i < n;i++) {
+        scanf("%d", &num);
+        push(num, &a);
+    }
     print(a);
-    push(60, &b);
-    push(50, &b);
-    push(40, &b);
-    print(b);
-    swap(a, b);
+    printf("How many elements on the second linked list(Besar ke Kecil): ");
+    scanf("%d", &m);
+    for (int i = 0;i < n;i++) {
+        scanf("%d", &num);
+        push(num, &b);
+    }
+    swap(b, a);
     print(head);
 
     return 0;
