@@ -40,7 +40,7 @@ void pushmid(int value) {
         node* temp = createnode(value);
         head = tail = temp;
     }
-    else if (value >= head->value) {
+    else if (value > head->value) {
         pushhead(value);
     }
     else if (value <= tail->value) {
