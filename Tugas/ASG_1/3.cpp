@@ -36,8 +36,8 @@ void pushtail(int value) {
 }
 
 void pushmid(int value) {
+    node* temp = createnode(value);
     if (!head) {
-        node* temp = createnode(value);
         head = tail = temp;
     }
     else if (value > head->value) {
@@ -47,13 +47,12 @@ void pushmid(int value) {
         pushtail(value);
     }
     else {
-        node* temp2 = createnode(value);
-        node* temp = head;
-        while (temp->next && temp->next->value > value) {
-            temp = temp->next;
+        node* curr = head;
+        while (curr->next && curr->next->value > value) {
+            curr = curr->next;
         }
-        temp2->next = temp->next;
-        temp->next = temp2;
+        temp->next = curr->next;
+        curr->next = temp;
     }
 }
 
