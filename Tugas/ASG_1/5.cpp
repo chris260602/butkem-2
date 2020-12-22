@@ -127,6 +127,7 @@ void findindex(int index) {
 }
 
 int main() {
+    int index;
     pushmid(10);
     pushmid(20);
     pushmid(30);
@@ -134,8 +135,9 @@ int main() {
     pushmid(50);
     pushmid(60);
     printall();
-    puts("Index dari tail:");
-    findindex(3);
+    scanf("%d", &index);
+    printf("Index dari %d: ", index);
+    findindex(index);
 
     return 0;
 }
