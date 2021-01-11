@@ -102,3 +102,12 @@ void Add() {
     puts("3. Exit");
     printf(">> ");
 }
+
+void preference_screen() {
+    system("cls || clear");
+    puts("1. Kering");
+    puts("2. Basah");
+    puts("3. Minuman");
+    puts("4. Dessert");
+    printf(">> ");
+}

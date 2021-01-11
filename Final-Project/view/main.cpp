@@ -72,6 +72,32 @@ int main() {
             //Homepage
             if (opt1 == 1) {
                 Home_Page();
+                int opt_home = -1;
+                do {
+                    scanf("%d", &opt_home);
+                    getchar();
+                } while (opt_home < 1 && opt_home>3);
+
+                //Suggestion (DONE)
+                if (opt_home == 1) {
+                    print_global(curr_user->preference);
+                }
+
+                //Search
+                else if (opt_home == 2) {
+                    int opt_filter = -1;
+                    preference_screen();
+                    do {
+                        scanf("%d", &opt_filter);
+                        getchar();
+                    } while (opt_filter < 1 && opt_filter>4);
+                    search_global(opt_filter);
+                }
+
+                //Exit
+                else if (opt_home == 3) {
+                    continue;
+                }
             }
 
             //CookBook (DONE)
@@ -99,14 +125,20 @@ int main() {
                 else if (opt2 == 3) {
                     int recipe_qty;
                     recipe* temp = (recipe*)malloc(sizeof(recipe));
+                    printf("What is your recipe type:\n");
+                    preference_screen();
+                    do {
+                        scanf("%d", &temp->type[0]);
+                        getchar();
+                    } while (temp->type[0] < 1 && temp->type[0]>4);
                     printf("What is the name of your recipe: ");
-                    scanf("%[^\n]", temp->name);
+                    scanf("%[^\n]", temp->name[0]);
                     getchar();
-                    printf("What is your description of %s: ", temp->name);
-                    scanf("%[^\n]", temp->description);
+                    printf("What is your description of %s: ", temp->name[0]);
+                    scanf("%[^\n]", temp->description[0]);
                     getchar();
                     printf("What is your instruction of %s: ", temp->name);
-                    scanf("%[^\n]", temp->instruction);
+                    scanf("%[^\n]", temp->instruction[0]);
                     getchar();
                     printf("How many ingredients are there: ");
                     scanf("%d", &recipe_qty);
@@ -117,6 +149,7 @@ int main() {
                         getchar();
                     }
                     add_recipe(curr_user, temp, recipe_qty);
+                    add_global(temp, recipe_qty);
                     free(temp);
                 }
                 //Remove Recipe (DONE)
@@ -125,7 +158,10 @@ int main() {
                     printf("What dish do you want to remove: ");
                     scanf("%[^\n]", rem_rec);
                     getchar();
-                    Remove_recipe(curr_user, rem_rec);
+                    int flag = Remove_recipe(curr_user, rem_rec);
+                    if (flag == 1) {
+                        Remove_global(rem_rec);
+                    }
                 }
                 //Exit
                 else if (opt2 == 5) {
@@ -189,8 +225,7 @@ int main() {
                 }
             }
 
-            //Profile
-            //Sisa Preferences
+            //Profile (DONE)
             else if (opt1 == 5) {
                 bool run5 = true;
                 while (run5) {
@@ -201,10 +236,15 @@ int main() {
                         getchar();
                     } while (opt5 < 1 && opt5>3);
 
-                    //Preferences
+                    //Preferences (DONE)
                     if (opt5 == 1) {
-                        puts("Coming soon!");
-                        getchar();
+                        int opt_pref = -1;
+                        preference_screen();
+                        do {
+                            scanf("%d", &opt_pref);
+                            getchar();
+                        } while (opt_pref < 1 && opt_pref>4);
+                        add_preference(curr_user, opt_pref);
                     }
 
                     // Settings (DONE)
