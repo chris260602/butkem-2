@@ -10,16 +10,17 @@ struct recipe {
     char ingredient[50][20][50];
     char instruction[50][500];
 };
-
+struct bahan {
+    char name[100][100];
+    int qty[100];
+};
 struct user {
     char name[100];
     char pass[100];
     recipe masakan;
+    bahan makanan;
     user* next, * prev;
 }*headuser, * tailuser;
 
-struct dish {
-    char name[100];
-    dish* next, * prev;
-}*headdish, * taildish;
+
 
