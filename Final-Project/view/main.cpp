@@ -69,7 +69,7 @@ int main() {
                 scanf("%d", &opt1);
                 getchar();
             } while (opt1 < 1 && opt1>6);
-            //Homepage
+            //Homepage (DONE)
             if (opt1 == 1) {
                 Home_Page();
                 int opt_home = -1;
@@ -83,7 +83,7 @@ int main() {
                     print_global(curr_user->preference);
                 }
 
-                //Search
+                //Search (DONE)
                 else if (opt_home == 2) {
                     int opt_filter = -1;
                     preference_screen();
