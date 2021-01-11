@@ -1,0 +1,6 @@
+Hal yang masih kurang :
+
+1. Kitchen
+2. UI
+3. Validasi
+4. Cari Bug
