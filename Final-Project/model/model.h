@@ -1,9 +1,3 @@
-
-
-
-
-
-
 struct recipe {
     char name[50][100];
     char description[50][255];
