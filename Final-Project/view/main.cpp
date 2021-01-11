@@ -20,6 +20,7 @@ int main() {
         } while (opt < 1 || opt>3);
 
         //Login
+        //DONE
         if (opt == 1) {
             do {
                 puts("Type 'back' to go back");
@@ -40,6 +41,7 @@ int main() {
         }
 
         //Register
+        //DONE
         else if (opt == 2) {
             char new_user[100];
             char new_pass[100];
@@ -67,43 +69,34 @@ int main() {
                 scanf("%d", &opt1);
                 getchar();
             } while (opt1 < 1 && opt1>6);
+            //Homepage
             if (opt1 == 1) {
                 Home_Page();
             }
+
+            //CookBook (DONE)
             else if (opt1 == 2) {
                 Cook_Book();
                 int opt2 = -1;
                 do {
                     scanf("%d", &opt2);
                     getchar();
-                } while (opt2 < 1 && opt2>3);
+                } while (opt2 < 1 && opt2>4);
+
+                //Saved Recipe (DONE)
                 if (opt2 == 1) {
                     print_recipe(curr_user);
                 }
+                //Search (DONE)
                 else if (opt2 == 2) {
-
-                }
-                else if (opt2 == 3) {
-                    continue;
-                }
-            }
-            else if (opt1 == 3) {
-                Kitchen();
-            }
-            else if (opt1 == 4) {
-                Pantry();
-                int opt4 = -1;
-                do {
-                    scanf("%d", &opt4);
+                    char recipe_name[100];
+                    printf("What recipe do you want to find: ");
+                    scanf("%[^\n]", recipe_name);
                     getchar();
-                } while (opt4 < 1 && opt4>5);
-                if (opt4 == 1) {
-
+                    search_recipe(curr_user, recipe_name);
                 }
-                else if (opt4 == 2) {
-
-                }
-                else if (opt4 == 3) {
+                //Add recipe (DONE)
+                else if (opt2 == 3) {
                     int recipe_qty;
                     recipe* temp = (recipe*)malloc(sizeof(recipe));
                     printf("What is the name of your recipe: ");
@@ -124,17 +117,80 @@ int main() {
                         getchar();
                     }
                     add_recipe(curr_user, temp, recipe_qty);
-
+                    free(temp);
                 }
+                //Remove Recipe (DONE)
+                else if (opt2 == 4) {
+                    char rem_rec[100];
+                    printf("What dish do you want to remove: ");
+                    scanf("%[^\n]", rem_rec);
+                    getchar();
+                    Remove_recipe(curr_user, rem_rec);
+                }
+                //Exit
+                else if (opt2 == 5) {
+                    continue;
+                }
+            }
+
+            //Kitchen
+            else if (opt1 == 3) {
+                Kitchen();
+            }
+
+            //Pantry (DONE)
+            else if (opt1 == 4) {
+                Pantry();
+                int opt4 = -1;
+                do {
+                    scanf("%d", &opt4);
+                    getchar();
+                } while (opt4 < 1 && opt4>5);
+                //Ingredient (DONE)
+                if (opt4 == 1) {
+                    print_ingredient(curr_user);
+                }
+                //Search (DONE)
+                else if (opt4 == 2) {
+                    char ingredient_name[100];
+                    printf("What ingredient are you looking for: ");
+                    scanf("%[^\n]", ingredient_name);
+                    getchar();
+                    search_ingredient(curr_user, ingredient_name);
+                }
+                //Add ingredient (DONE)
+                else if (opt4 == 3) {
+                    bahan* temp = (bahan*)malloc(sizeof(bahan));
+                    printf("What is your ingredient name: ");
+                    scanf("%[^\n]", temp->name[0]);
+                    getchar();
+                    printf("What is the quantity of your ingredient : ");
+                    scanf("%d", &temp->qty[0]);
+                    getchar();
+                    add_ingredient(curr_user, temp);
+                    free(temp);
+                }
+                //Remove ingredient (DONE)
                 else if (opt4 == 4) {
-
+                    bahan* temp = (bahan*)malloc(sizeof(bahan));
+                    printf("What is your ingredient name: ");
+                    scanf("%[^\n]", temp->name[0]);
+                    getchar();
+                    printf("What how many do you want to remove : ");
+                    scanf("%d", &temp->qty[0]);
+                    getchar();
+                    remove_ingredient(curr_user, temp);
+                    free(temp);
                 }
+
+                //Exit
                 else if (opt4 == 5) {
                     continue;
                 }
             }
 
             //Profile
+            //Sisa Preferences
             else if (opt1 == 5) {
                 bool run5 = true;
                 while (run5) {
@@ -151,7 +207,7 @@ int main() {
                         getchar();
                     }
 
-                    // Settings
+                    // Settings (DONE)
                     else if (opt5 == 2) {
                         settings();
                         int opt_setting = -1;
@@ -160,7 +216,7 @@ int main() {
                             getchar();
                         } while (opt_setting < 1 && opt_setting>3);
 
-                        //Change Username
+                        //Change Username (DONE)
                         if (opt_setting == 1) {
                             char new_name[255];
                             scanf("%[^\n]", new_name);
@@ -174,7 +230,7 @@ int main() {
                             }
                         }
 
-                        //Change Password
+                        //Change Password (DONE)
                         else if (opt_setting == 2) {
                             char new_pass[255];
                             scanf("%[^\n]", new_pass);

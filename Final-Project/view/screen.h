@@ -37,7 +37,9 @@ void Cook_Book() {
     system("cls || clear");
     puts("1. Saved Recipes");
     puts("2. Search");
-    puts("3. Exit");
+    puts("3. Add Recipe");
+    puts("4. Remove Recipe");
+    puts("5. Exit");
     printf(">> ");
 }
 
