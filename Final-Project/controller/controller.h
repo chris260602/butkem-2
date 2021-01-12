@@ -70,7 +70,7 @@ void add_recipe(user* curr, recipe* temp, int qty) {
         if (curr->masakan.name[i][0] == '\0') {
             strcpy(curr->masakan.name[i], (char*)temp->name);
             strcpy(curr->masakan.description[i], (char*)temp->description);
-            strcpy(curr->masakan.instruction[i], (char*)temp->instruction);
+            strcpy(curr->masakan.instruction[i][i], (char*)temp->instruction);
             for (int j = 0;j < qty;j++) {
                 strcpy(curr->masakan.ingredient[i][j], (char*)temp->ingredient);
             }
@@ -132,7 +132,7 @@ int Remove_recipe(user* curr, char* name) {
     else if (strcmp(curr->masakan.name[i], name) == 0) {
         curr->masakan.name[i][0] = '\0';
         curr->masakan.description[i][0] = '\0';
-        curr->masakan.instruction[i][0] = '\0';
+        curr->masakan.instruction[i][i][0] = '\0';
         int j = 0;
         while (curr->masakan.ingredient[i][j][0] != '\0') {
             curr->masakan.ingredient[i][j][0] = '\0';
@@ -174,7 +174,7 @@ global_recipe* make_global(recipe* curr, int qty) {
     global_recipe* temp = (global_recipe*)malloc(sizeof(global_recipe));
     strcpy(temp->name, curr->name[0]);
     strcpy(temp->description, curr->description[0]);
-    strcpy(temp->instruction, curr->instruction[0]);
+    strcpy(temp->instruction, curr->instruction[0][0]);
     temp->type = curr->type[0];
     temp->next = temp->prev = NULL;
     int j = 0;
@@ -445,7 +445,7 @@ void cooking(struct user* curr, int opt) {
     while (i < 19 && curr->masakan.instruction[opt - 1][0] != '\0') {
         system("cls || clear");
         printf("Step %d   ", i + 1);
-        // progress_bar((float)((i + 1) / end_progress * 100));
+        progress_bar((float)((i + 1) / end_progress * 100));
         printf("%s\n", curr->masakan.instruction[opt - 1][0]);
         printf("\n\n\n--------------------------------\n");
         printf("Press \"<\" to step back, \">\" to next, \"s\" to stop\n");
