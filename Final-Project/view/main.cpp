@@ -173,7 +173,7 @@ int main() {
 
             //Kitchen
             else if (opt1 == 3) {
-                 Kitchen(curr_user);
+                Kitchen();
             }
 
             //Pantry (DONE)

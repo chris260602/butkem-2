@@ -2,7 +2,6 @@
 #include<string.h>
 #include<stdlib.h>
 #include "../model/model.h"
-// #include "../views/screen.h"
 
 user* create_user(char* name, char* pass) {
     user* temp = (user*)malloc(sizeof(user));
@@ -70,7 +69,7 @@ void add_recipe(user* curr, recipe* temp, int qty) {
         if (curr->masakan.name[i][0] == '\0') {
             strcpy(curr->masakan.name[i], (char*)temp->name);
             strcpy(curr->masakan.description[i], (char*)temp->description);
-            strcpy(curr->masakan.instruction[i][i], (char*)temp->instruction);
+            strcpy(curr->masakan.instruction[i], (char*)temp->instruction);
             for (int j = 0;j < qty;j++) {
                 strcpy(curr->masakan.ingredient[i][j], (char*)temp->ingredient);
             }
@@ -132,7 +131,7 @@ int Remove_recipe(user* curr, char* name) {
     else if (strcmp(curr->masakan.name[i], name) == 0) {
         curr->masakan.name[i][0] = '\0';
         curr->masakan.description[i][0] = '\0';
-        curr->masakan.instruction[i][i][0] = '\0';
+        curr->masakan.instruction[i][0] = '\0';
         int j = 0;
         while (curr->masakan.ingredient[i][j][0] != '\0') {
             curr->masakan.ingredient[i][j][0] = '\0';
@@ -174,7 +173,7 @@ global_recipe* make_global(recipe* curr, int qty) {
     global_recipe* temp = (global_recipe*)malloc(sizeof(global_recipe));
     strcpy(temp->name, curr->name[0]);
     strcpy(temp->description, curr->description[0]);
-    strcpy(temp->instruction, curr->instruction[0][0]);
+    strcpy(temp->instruction, curr->instruction[0]);
     temp->type = curr->type[0];
     temp->next = temp->prev = NULL;
     int j = 0;
@@ -367,158 +366,8 @@ void search_ingredient(user* curr, char* name) {
     }
 }
 
-//Kitchen
 
-int print_all_recipe(struct user* curr) {
-    struct user* temp = curr;
-    int i = 0, flag = 0, count = 0;
-    system("cls || clear");
-    printf("List All of Your Recipe\n");
-    while (i <= 49) {
-        if (temp->masakan.name[i][0] != '\0') {
-            printf("%d. %s\n", i + 1, temp->masakan.name[i]);
-            flag = 1;
-            count++;
-        }
-        i++;
-    }
-    return count;
-}
 
-int select_recipe(struct user* curr) {
-    int opt = 0;
-    int max;
-    do {
-        max = print_all_recipe(curr);
-        if (max == 0) {
-            puts("No dish available!");
-            puts("--------------------------------");
-            puts("Please enter to continue");
-            getchar();
-            opt = 0;
-            break;
-        }
-        puts("--------------------------------");
-        puts("Please enter the number");
-        scanf("%d", &opt); getchar();
-    } while (opt < 1 || opt > max);
-
-    return opt;
-}
-
-void ingredients_list(user* curr, int opt) {
-    system("cls || clear");
-    printf("# Ingredients\n");
-    int i = 0;
-    while (curr->masakan.ingredient[opt - 1][i][0] != '\0' && i < 49) {
-        int lenQty = 3;  //maximal panjang qty
-        int lenStr = 2;  //maximal panjang satuan
-        if (curr->masakan.ingredient[opt - 1][0][0] == '\0') {
-            break;
-        }
-        if (strcmp(curr->masakan.satuan[opt - 1][i], "secukupnya") == 0) {
-            printf("%d. %*s%s (%s)\n", i + 1
-                , lenQty + lenStr + 2, ""
-                , curr->masakan.ingredient[opt - 1][i]
-                , curr->masakan.satuan[opt - 1][i]);
-
-        }
-        else {
-            printf("%d. %*d %*s %s\n", i + 1
-                , lenQty
-                , curr->masakan.qty[opt - 1][i]
-                , lenStr, curr->masakan.satuan[opt - 1][i]
-                , curr->masakan.ingredient[opt - 1][i]);
-        }
-        i++;
-    }
-    puts("--------------------------------");
-    puts("Press enter to start cooking");
-    getchar();
-    return;
-}
-
-void cooking(struct user* curr, int opt) {
-    int progress = 0;
-    int end_progress = curr->masakan.total_ins[opt - 1];
-    int i = 0;
-    while (i < 19 && curr->masakan.instruction[opt - 1][0] != '\0') {
-        system("cls || clear");
-        printf("Step %d   ", i + 1);
-        progress_bar((float)((i + 1) / end_progress * 100));
-        printf("%s\n", curr->masakan.instruction[opt - 1][0]);
-        printf("\n\n\n--------------------------------\n");
-        printf("Press \"<\" to step back, \">\" to next, \"s\" to stop\n");
-        char nav;
-        do {
-            printf(">> ");
-            scanf("%s", &nav); getchar();
-        } while (nav != '<' && nav != '>' && nav != 's');
-
-        switch (nav)nav : {
-        case '<':
-            i--;
-            break;
-        case '>':
-            i++;
-            break;
-        case 's':
-            i = 20;
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-void progress_bar(float progress) {
-    if (progress <= 5) {
-        printf("[          ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 15) {
-        printf("[#         ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 25) {
-        printf("[##        ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 35) {
-        printf("[###       ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 45) {
-        printf("[####      ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 55) {
-        printf("[#####     ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 65) {
-        printf("[######    ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 75) {
-        printf("[#######   ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 85) {
-        printf("[########  ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 95) {
-        printf("[######### ] %.2lf%%\n", progress);
-    }
-    else if (progress <= 100) {
-        printf("[##########] %.2lf%%\n", progress);
-    }
-}
-
-void Kitchen(user* curr) {
-    int opt = select_recipe(curr);
-    puts("hi");
-    getchar();
-    if (opt == 0) return;
-    puts("hi");
-    getchar();
-    ingredients_list(curr, opt);
-    puts("hi");
-    getchar();
-    cooking(curr, opt);
-}
 
 /***********
  Validation

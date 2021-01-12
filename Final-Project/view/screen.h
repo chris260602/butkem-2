@@ -135,5 +135,3 @@ void preference_screen() {
     puts("4. Dessert");
     printf(">> ");
 }
-
-
