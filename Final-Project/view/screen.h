@@ -111,3 +111,29 @@ void preference_screen() {
     puts("4. Dessert");
     printf(">> ");
 }
+
+void progress_bar(float progress){
+	if        (progress <=  5  ){
+		printf("[          ] %.2lf%%\n", progress);
+	} else if (progress <= 15  ){
+		printf("[#         ] %.2lf%%\n", progress);
+	} else if (progress <= 25  ){
+		printf("[##        ] %.2lf%%\n", progress);
+	} else if (progress <= 35  ){
+		printf("[###       ] %.2lf%%\n", progress);
+	} else if (progress <= 45  ){
+		printf("[####      ] %.2lf%%\n", progress);
+	} else if (progress <= 55  ){
+		printf("[#####     ] %.2lf%%\n", progress);
+	} else if (progress <= 65  ){
+		printf("[######    ] %.2lf%%\n", progress);
+	} else if (progress <= 75  ){
+		printf("[#######   ] %.2lf%%\n", progress);
+	} else if (progress <= 85  ){
+		printf("[########  ] %.2lf%%\n", progress);
+	} else if (progress <= 95  ){
+		printf("[######### ] %.2lf%%\n", progress);
+	} else if (progress <= 100 ){
+		printf("[##########] %.2lf%%\n", progress);
+	}
+}
