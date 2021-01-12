@@ -4,6 +4,10 @@ struct recipe {
     char ingredient[50][20][50];
     char instruction[50][500];
     int type[50];
+    
+    char satuan [50][ 20][ 50];
+    int  qty [50][ 20];
+    int  total_ins [50];
 };
 struct bahan {
     char name[100][100];
