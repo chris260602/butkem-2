@@ -439,12 +439,12 @@ void ingredients_list(struct user *curr, int opt){
 
 void cooking(struct user *curr, int opt){
 	int progress = 0;
-	int end_progress = curr->masakan.total_ins[opt-1];
+	float end_progress = curr->masakan.total_ins[opt-1];
 	int i = 0;
 	while (i < 19 && curr->masakan.instruction[opt-1][i][0] != '\0'){
 		system("cls || clear");
 		printf("Step %d   ", i+1);
-		progress_bar((float) (i+1) /end_progress * 100);
+		progress_bar((i+1) /end_progress * 100);
 		printf("%s\n", curr->masakan.instruction[opt-1][i]);
 		printf("\n\n\n--------------------------------\n");
 		printf("Press \"<\" to step back, \">\" to next, \"s\" to stop\n");
@@ -467,6 +467,7 @@ void cooking(struct user *curr, int opt){
 			default:
 				break;
 		}
+
 	}
 }
 
