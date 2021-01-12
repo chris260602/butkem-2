@@ -375,6 +375,11 @@ void search_ingredient(user* curr, char* name) {
 
 bool validate_new_user(char* name) {
     user* curr = headuser;
+    if (strlen(name) < 3 || strlen(name) > 50) {
+        puts("Name length from 3-50 only!");
+        getchar();
+        return false;
+    }
     while (curr) {
         if (strcmp(curr->name, name) == 0) {
             puts("User already exist!");
@@ -382,6 +387,15 @@ bool validate_new_user(char* name) {
             return false;
         }
         curr = curr->next;
+    }
+    return true;
+}
+
+bool validate_new_pass(char* pass) {
+    if (strlen(pass) < 4 || strlen(pass) > 12) {
+        puts("Name length from 4-12 only!");
+        getchar();
+        return false;
     }
     return true;
 }

@@ -50,9 +50,11 @@ int main() {
                 scanf("%[^\n]", new_user);
                 getchar();
             } while (!validate_new_user(new_user));
-            printf("Input new password: ");
-            scanf("%[^\n]", new_pass);
-            getchar();
+            do {
+                printf("Input new password: ");
+                scanf("%[^\n]", new_pass);
+                getchar();
+            } while (!validate_new_pass(new_pass));
             push_user(new_user, new_pass);
             printf("%s Succefully Registered\n", new_user);
             getchar();
