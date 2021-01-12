@@ -2,20 +2,13 @@ struct recipe {
     char name[50][100];
     char description[50][255];
     char ingredient[50][20][50];
-    char instruction[50][500]; 
+    char instruction[50][500];
     int type[50];
     
     char satuan [50][ 20][ 50];
     int  qty [50][ 20];
     int  total_ins [50];
 };
-struct recipe {	struct recipe {
-    char name[50][100];
-    char description[50][255];
-    char ingredient[50][20][50];
-    char instruction[50][500]; 
-    int type[50];
-
 struct bahan {
     char name[100][100];
     int qty[100];
